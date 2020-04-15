@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Simple {
 
     @Id @Column(length=36, nullable=false)
-    String id;
+    private String id;
 
     @PrePersist
     public void genId() {

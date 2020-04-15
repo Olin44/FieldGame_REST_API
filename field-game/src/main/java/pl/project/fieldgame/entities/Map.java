@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Map extends Simple {
 
-    String name;
+    private String name;
 
     @OneToMany(mappedBy="map", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
     List<ObjectOnMapDetails> objectOnMapDetails;
