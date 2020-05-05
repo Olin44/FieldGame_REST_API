@@ -4,5 +4,5 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class SimpleDTO {
-    String id;
+    //String id;
 }

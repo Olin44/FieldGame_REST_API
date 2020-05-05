@@ -1,7 +1,16 @@
 package pl.project.fieldgame;
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import pl.project.fieldgame.entities.LatLng;
+import pl.project.fieldgame.entities.Map;
+import pl.project.fieldgame.entities.ObjectOnMapDetails;
+import pl.project.fieldgame.repositories.MapRepository;
+import pl.project.fieldgame.repositories.ObjectOnMapRepository;
+
+import java.util.Arrays;
 
 @SpringBootApplication
 public class FieldGameApplication {

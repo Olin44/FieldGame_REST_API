@@ -10,6 +10,7 @@ import java.util.UUID;
 @MappedSuperclass
 public class Simple {
 
+    @Getter
     @Id @Column(length=36, nullable=false)
     private String id;
 
