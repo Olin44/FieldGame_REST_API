@@ -7,6 +7,6 @@ import pl.project.fieldgame.entities.ObjectOnMapDetails;
 
 @Mapper
 public interface ObjectOnMapDetailsMapper extends SimpleMapper<ObjectOnMapDetails, ObjectOnMapDetailsDTO> {
-    @Mapping(target = "map", ignore = true)
-    ObjectOnMapDetailsDTO toDTO(ObjectOnMapDetails entity);
+//    @Mapping(target = "map", ignore = true)
+//    ObjectOnMapDetailsDTO toDTO(ObjectOnMapDetails entity);
 }
