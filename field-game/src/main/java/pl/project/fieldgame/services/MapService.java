@@ -24,14 +24,6 @@ public class MapService {
     }
 
     public List<MapDTO> getAllMaps(){
-        System.out.println(mapRepository.findAll().toString());
-        for(Map map : mapRepository.findAll()){
-            System.out.println(map.getName());
-            System.out.println(map.getId());
-            objectOnMapRepository.findAll();
-        }
-
-        mapMapper.toDTOList(mapRepository.findAll());
         return mapMapper.toDTOList(mapRepository.findAll());
     }
 

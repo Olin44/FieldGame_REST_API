@@ -22,12 +22,20 @@ public class UserService {
 
     public boolean registerUser(MyUserDTO myUserDTO){
         try {
-            MyUser myUser = userMapper.toEntity(myUserDTO);
-            userRepository.save(myUser);
-            return true;
+            if(isUserInDatabase(myUserDTO)){
+                return false;
+            }else{
+                MyUser myUser = userMapper.toEntity(myUserDTO);
+                userRepository.save(myUser);
+                return true;
+            }
         }
         catch (Exception e){
             return false;
         }
+    }
+
+    private boolean isUserInDatabase(MyUserDTO myUserDTO){
+        return userRepository.findByUsername(myUserDTO.getUsername()).isPresent();
     }
 }
