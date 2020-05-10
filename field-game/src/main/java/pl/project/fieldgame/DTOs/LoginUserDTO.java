@@ -2,14 +2,13 @@ package pl.project.fieldgame.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class MyUserDTO extends SimpleDTO {
-    private String username;
+public class LoginUserDTO {
     private String password;
     private String email;
-    private boolean isActive;
 }

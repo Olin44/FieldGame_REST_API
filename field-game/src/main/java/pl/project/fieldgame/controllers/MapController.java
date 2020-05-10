@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.project.fieldgame.DTOs.MapDTO;
-import pl.project.fieldgame.services.MapService;
+import pl.project.fieldgame.services.MapServiceImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/maps")
 public class MapController {
 
-    private final MapService mapService;
+    private final MapServiceImpl mapService;
 
     @GetMapping("/getAllMaps")
     List<MapDTO> getAllMaps(){

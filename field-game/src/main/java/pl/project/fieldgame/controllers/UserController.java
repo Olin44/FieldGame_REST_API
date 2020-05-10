@@ -2,6 +2,7 @@ package pl.project.fieldgame.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.project.fieldgame.DTOs.LoginUserDTO;
 import pl.project.fieldgame.DTOs.MyUserDTO;
 import pl.project.fieldgame.services.UserService;
 
@@ -17,6 +18,11 @@ public class UserController  {
     @PostMapping("/registerUser")
     private boolean registerUser(@RequestBody MyUserDTO myUserDTO){
         return userService.registerUser(myUserDTO);
+    }
+
+    @PostMapping("/login")
+    private boolean login(@RequestBody LoginUserDTO loginUserDTO){
+        return userService.login(loginUserDTO);
     }
 
 }
