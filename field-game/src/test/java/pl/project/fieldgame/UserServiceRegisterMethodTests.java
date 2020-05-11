@@ -18,14 +18,12 @@ public class UserServiceRegisterMethodTests extends UserServiceTests{
     void userIsInDataBase(){
         when(userRepository.findByEmail(myUserDTO.getEmail())).thenReturn(Optional.of(myUser));
 
-        assertThat(userService.registerUser(myUserDTO)).
-                isFalse();
+        assertThat(userService.registerUser(myUserDTO)).isEqualTo(null);
     }
     @Test
     void userNotInDataBase(){
         when(userRepository.findByEmail(myUserDTO.getEmail())).thenReturn(Optional.empty());
 
-        assertThat(userService.registerUser(myUserDTO)).
-                isTrue();
+        assertThat(userService.registerUser(myUserDTO)).isEqualTo(myUserDTO);
     }
 }

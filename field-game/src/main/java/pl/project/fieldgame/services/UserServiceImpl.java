@@ -25,13 +25,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean registerUser(MyUserDTO myUserDTO){
+    public MyUserDTO registerUser(MyUserDTO myUserDTO) {
         if(!isUserInDatabase(myUserDTO)){
             MyUser myUser = userMapper.toEntity(myUserDTO);
             userRepository.save(myUser);
-            return true;
+            return myUserDTO;
+        }else {
+            throw new ApiException("login failder");
         }
-        return false;
     }
 
     @Override

@@ -16,12 +16,12 @@ public class UserController  {
     private final UserService userService;
 
     @PostMapping("/registerUser")
-    private boolean registerUser(@RequestBody MyUserDTO myUserDTO){
+    private MyUserDTO registerUser(@RequestBody MyUserDTO myUserDTO){
         return userService.registerUser(myUserDTO);
     }
 
     @PostMapping("/login")
-    private boolean login(@RequestBody LoginUserDTO loginUserDTO){
+    private Boolean login(@RequestBody LoginUserDTO loginUserDTO){
         return userService.login(loginUserDTO);
     }
 

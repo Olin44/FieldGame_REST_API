@@ -1,5 +1,6 @@
 package pl.project.fieldgame.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 public class Simple {
 
     @Getter
+    @JsonIgnore
     @Id @Column(length=36, nullable=false)
     private String id;
 

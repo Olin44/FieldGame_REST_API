@@ -11,23 +11,13 @@ import javax.persistence.*;
 
 @Entity
 @RequiredArgsConstructor
-
+@Getter
+@Setter
 public class ObjectOnMapDetails extends Simple {
-    @Getter
-    @Setter
     private ObjectType objectType;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "map_id")
-    private Map map;
-
+    private String mapId;
     @OneToOne
-
-    @Getter
-    @Setter
+    @JoinColumn(name = "objectOnMapDetailsId")
     private LatLng latLng;
-
-    @Getter
-    @Setter
     private String hint;
 }

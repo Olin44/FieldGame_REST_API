@@ -11,15 +11,11 @@ import java.util.List;
 
 @Entity
 @Setter
+@Getter
 @RequiredArgsConstructor
 public class Map extends Simple {
-
-    @Getter
     private String name;
-
-    @Getter
-    @OneToMany(mappedBy="map")
-    @Fetch(value = FetchMode.JOIN)
-
+    @OneToMany
+    @JoinColumn(name = "mapId")
     List<ObjectOnMapDetails> objectOnMapDetails;
 }
