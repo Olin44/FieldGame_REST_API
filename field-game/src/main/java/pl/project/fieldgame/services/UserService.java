@@ -6,5 +6,5 @@ import pl.project.fieldgame.DTOs.MyUserDTO;
 public interface UserService {
     MyUserDTO registerUser(MyUserDTO myUserDTO);
 
-    boolean login(LoginUserDTO loginUserDTO);
+    MyUserDTO login(LoginUserDTO loginUserDTO);
 }

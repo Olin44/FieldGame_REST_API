@@ -14,10 +14,10 @@ insert into lat_lng(id, latitude, longitude, object_on_map_details_id) values('1
 insert into lat_lng(id, latitude, longitude, object_on_map_details_id) values('2', 85.0, 25.0, 3);
 insert into lat_lng(id, latitude, longitude, object_on_map_details_id) values('3', 478.0, 672., 5);
 insert into lat_lng(id, latitude, longitude, object_on_map_details_id) values('4', 85.0, 25.0, 7);
-insert into lat_lng(id, latitude, longitude, object_on_map_details_id) values('5', 255.0, 45.0, 7);
+insert into lat_lng(id, latitude, longitude, object_on_map_details_id) values('5', 255.0, 45.0, 6);
 insert into lat_lng(id, latitude, longitude, object_on_map_details_id) values('6', 478.0, 672., 8);
 
-insert into my_user(id, username, password, email, is_active) values ('1', 'user1', 'password1', 'email1@email.pl', true);
-insert into my_user(id, username, password, email, is_active) values ('2', 'user2', 'password2', 'email2@email.pl', true);
+insert into my_user(id, username, password, email, is_active) values ('1', 'user1', 'password1', 'email1@email.pl', false);
+insert into my_user(id, username, password, email, is_active) values ('2', 'user2', 'password2', 'email2@email.pl', false);
 
 

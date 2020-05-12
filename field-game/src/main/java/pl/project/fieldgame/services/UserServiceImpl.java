@@ -26,34 +26,41 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MyUserDTO registerUser(MyUserDTO myUserDTO) {
-        if(!isUserInDatabase(myUserDTO)){
-            MyUser myUser = userMapper.toEntity(myUserDTO);
-            userRepository.save(myUser);
-            return myUserDTO;
-        }else {
-            throw new ApiException("login failder");
-        }
+        return Optional.of(myUserDTO)
+                .filter(this::isUserNotInDataBase)
+                .filter(this::isEmailValid)
+                .map(this::saveUser)
+                .orElseThrow(() ->new ApiException("Register error"));
     }
 
     @Override
-    public boolean login(LoginUserDTO loginUserDTO) {
-
-        if(isEmailValid(loginUserDTO.getEmail())) {
-            Optional<MyUser> myUserOptional = userRepository.findByEmail(loginUserDTO.getEmail());
-            if (myUserOptional.isPresent()) {
-                MyUser myUser = myUserOptional.get();
-                if (isLoginDataValid(loginUserDTO, myUser)) {
-                    if (!isUserLoggedOnAnotherDevice(myUser)) {
-                        myUser.setActive(true);
-                        userRepository.save(myUser);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+    public MyUserDTO login(LoginUserDTO loginUserDTO) {
+        return userRepository.findByEmail(loginUserDTO.getEmail())
+                .filter(u -> isLoginDataValid(loginUserDTO, u))
+                .filter(this::isUserNotLoggedOnAnotherDevice)
+                .filter(this::save)
+                .map(userMapper::toDTO)
+                .orElseThrow(() ->new ApiException("Login error"));
     }
 
+    private MyUserDTO saveUser(MyUserDTO myUserDTO){
+        MyUser myUser = userMapper.toEntity(myUserDTO);
+        userRepository.save(myUser);
+        return myUserDTO;
+    }
+
+    private boolean isUserNotInDataBase(MyUserDTO myUserDTO){
+        return !isUserInDatabase(myUserDTO);
+    }
+    private boolean isUserNotLoggedOnAnotherDevice(MyUser user) {
+        return !isUserLoggedOnAnotherDevice(user);
+    }
+
+    private boolean save(MyUser user) {
+        user.setActive(true);
+        userRepository.save(user);
+        return true;
+    }
 
     private boolean isUserInDatabase(MyUserDTO myUserDTO){
         return userRepository.findByEmail(myUserDTO.getEmail()).isPresent();
@@ -68,10 +75,10 @@ public class UserServiceImpl implements UserService {
         return myUser.isActive();
     }
 
-    private boolean isEmailValid(String email){
-        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+    private boolean isEmailValid(MyUserDTO myUserDTO){
+        String regex = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
+        Matcher matcher = pattern.matcher(myUserDTO.getEmail());
         return matcher.matches();
     }
 }

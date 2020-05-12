@@ -21,7 +21,7 @@ public class UserController  {
     }
 
     @PostMapping("/login")
-    private Boolean login(@RequestBody LoginUserDTO loginUserDTO){
+    private MyUserDTO login(@RequestBody LoginUserDTO loginUserDTO){
         return userService.login(loginUserDTO);
     }
 
