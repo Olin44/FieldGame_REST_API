@@ -29,9 +29,9 @@ public class UserController  {
         return userService.login(loginUserDTO);
     }
 
-    @PostMapping("/addNewUserGameToUser")
-    private UserGameDTO addNewUserGameToUser(@RequestBody UserGameDTO userGameDTO){
-        return userGameService.addNewUserGameToUser(userGameDTO);
+    @GetMapping("addNewUserGameToUser/{userId}/{mapId}")
+    private UserGameDTO addNewUserGameToUser(@PathVariable(name = "userId") String userID, @PathVariable(name = "mapId") String mapId){
+        return userGameService.addNewUserGameToUser(userID, mapId);
     }
 
     @PostMapping("/logout")

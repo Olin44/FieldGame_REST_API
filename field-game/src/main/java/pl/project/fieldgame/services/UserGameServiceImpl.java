@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.project.fieldgame.DTOs.MyUserDTO;
 import pl.project.fieldgame.DTOs.UserGameDTO;
 import pl.project.fieldgame.entities.MyUser;
+import pl.project.fieldgame.entities.UserGame;
 import pl.project.fieldgame.mappers.UserGameMapper;
 import pl.project.fieldgame.mappers.UserMapper;
 import pl.project.fieldgame.repositories.UserGameRepository;
@@ -19,19 +20,20 @@ public class UserGameServiceImpl implements UserGameService {
     private final UserMapper userMapper;
 
     @Override
-    public UserGameDTO addNewUserGameToUser(UserGameDTO userGameDTO) {
+    public UserGameDTO addNewUserGameToUser(String userID, String mapId) {
         return userRepository
-                .findById(userGameDTO.getUserId())
-                .map(u -> addUserGame(u, userGameDTO))
+                .findById(userID)
+                .map(u -> addUserGame(u, mapId))
 //                .filter(this::newUserGameIsInUserGamesList)
                 .orElseThrow(() ->new ApiException("add game to user error"));
     }
 
 
-    private UserGameDTO addUserGame(MyUser myUser, UserGameDTO userGameDTO){
-        myUser.getUserGame().add(userGameMapper.toEntity(userGameDTO));
+    private UserGameDTO addUserGame(MyUser myUser, String mapId){
+        UserGame userGame = UserGame.builder().userId(myUser.getId()).mapId(mapId).isActive(true).points(0L).build();
+        myUser.getUserGame().add(userGame);
         userRepository.save(myUser);
-        return userGameDTO;
+        return userGameMapper.toDTO(userGame);
     }
 
 //    private boolean newUserGameIsInUserGamesList(UserGameDTO userGameDTO){
