@@ -7,7 +7,7 @@ import pl.project.fieldgame.utils.ObjectType;
 
 @Getter
 @Setter
-public class ObjectOnMapDetailsDTO extends SimpleDTO{
+public class ObjectOnMapDetailsDTO extends SimpleDTOWithId{
     ObjectType objectType;
     String hint;
     LatLng latLng;

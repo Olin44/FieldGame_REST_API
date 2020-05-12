@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class LoginUserDTO {
     private String password;
     private String email;

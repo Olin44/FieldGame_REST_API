@@ -1,14 +1,12 @@
 package pl.project.fieldgame.services;
 
-import lombok.AllArgsConstructor;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.project.fieldgame.DTOs.LoginUserDTO;
+import pl.project.fieldgame.DTOs.LogoutUserDTO;
 import pl.project.fieldgame.DTOs.MyUserDTO;
 import pl.project.fieldgame.entities.MyUser;
 
-import pl.project.fieldgame.mappers.SimpleMapper;
 import pl.project.fieldgame.mappers.UserMapper;
 import pl.project.fieldgame.repositories.UserRepository;
 
@@ -22,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+
 
 
     @Override
@@ -41,6 +40,22 @@ public class UserServiceImpl implements UserService {
                 .filter(this::save)
                 .map(userMapper::toDTO)
                 .orElseThrow(() ->new ApiException("Login error"));
+    }
+
+    @Override
+    public LogoutUserDTO logout(LogoutUserDTO logoutUserDTO) {
+        return userRepository.findByEmail(logoutUserDTO.getEmail())
+                .filter(u -> isLogoutDataValid(logoutUserDTO, u))
+                .filter(this::isUserLoggedOnAnotherDevice)
+                .filter(this::logout)
+                .map(userMapper::myUserToLogoutDTO)
+                .orElseThrow(() ->new ApiException("Logout error"));
+    }
+
+    private boolean logout(MyUser user) {
+        user.setActive(false);
+        userRepository.save(user);
+        return true;
     }
 
     private MyUserDTO saveUser(MyUserDTO myUserDTO){
@@ -69,6 +84,10 @@ public class UserServiceImpl implements UserService {
     private boolean isLoginDataValid(LoginUserDTO loginUserDTO, MyUser myUser){
         return loginUserDTO.getEmail().equals(myUser.getEmail())
                 && loginUserDTO.getPassword().equals(myUser.getPassword());
+    }
+
+    private boolean isLogoutDataValid(LogoutUserDTO logoutUserDTO, MyUser myUser){
+        return logoutUserDTO.getEmail().equals(myUser.getEmail());
     }
 
     private boolean isUserLoggedOnAnotherDevice(MyUser myUser){

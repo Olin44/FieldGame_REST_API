@@ -9,10 +9,9 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @MappedSuperclass
-public class Simple {
+public class SimpleEntity {
 
     @Getter
-    @JsonIgnore
     @Id @Column(length=36, nullable=false)
     private String id;
 

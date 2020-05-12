@@ -1,7 +1,5 @@
 package pl.project.fieldgame.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,7 +11,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class ObjectOnMapDetails extends Simple {
+public class ObjectOnMapDetails extends SimpleEntity {
     private ObjectType objectType;
     private String mapId;
     @OneToOne

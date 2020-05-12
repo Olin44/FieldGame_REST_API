@@ -6,7 +6,7 @@ import pl.project.fieldgame.DTOs.MapDTO;
 import pl.project.fieldgame.entities.LatLng;
 import pl.project.fieldgame.entities.Map;
 import pl.project.fieldgame.entities.ObjectOnMapDetails;
-import pl.project.fieldgame.entities.Simple;
+import pl.project.fieldgame.entities.SimpleEntity;
 import pl.project.fieldgame.mappers.LatLngMapper;
 import pl.project.fieldgame.mappers.MapMapper;
 import pl.project.fieldgame.repositories.LatLngRepository;
@@ -63,7 +63,7 @@ public class MapServiceImpl implements MapService {
     @Override
     public MapDTO getMapById(String mapID){
         Map map = mapRepository.getOneById(mapID);
-        List<LatLng> latLngs = latLngRepository.findAllByObjectOnMapDetailsIdIn(map.getObjectOnMapDetails().stream().map(Simple::getId).collect(Collectors.toList()));
+        List<LatLng> latLngs = latLngRepository.findAllByObjectOnMapDetailsIdIn(map.getObjectOnMapDetails().stream().map(SimpleEntity::getId).collect(Collectors.toList()));
         map.getObjectOnMapDetails().forEach(objectOnMapDetail-> objectOnMapDetail
                 .setLatLng(extractLatLng(latLngs, objectOnMapDetail.getId())));
         return mapMapper.toDTO(map);

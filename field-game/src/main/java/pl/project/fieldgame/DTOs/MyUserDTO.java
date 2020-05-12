@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class MyUserDTO extends SimpleDTO {
+public class MyUserDTO extends SimpleDTOWithId {
     private String username;
     private String password;
     private String email;
