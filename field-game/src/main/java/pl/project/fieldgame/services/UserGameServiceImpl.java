@@ -11,6 +11,8 @@ import pl.project.fieldgame.mappers.UserMapper;
 import pl.project.fieldgame.repositories.UserGameRepository;
 import pl.project.fieldgame.repositories.UserRepository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class UserGameServiceImpl implements UserGameService {
@@ -33,7 +35,8 @@ public class UserGameServiceImpl implements UserGameService {
         UserGame userGame = UserGame.builder().userId(myUser.getId()).mapId(mapId).isActive(true).points(0L).build();
         myUser.getUserGame().add(userGame);
         userRepository.save(myUser);
-        return userGameMapper.toDTO(userGame);
+        List<UserGame> userGameList = userGameRepository.findByUserId(myUser.getId());
+        return userGameMapper.toDTO(userGameList.get(userGameList.size()-1));
     }
 
 //    private boolean newUserGameIsInUserGamesList(UserGameDTO userGameDTO){
