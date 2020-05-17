@@ -30,6 +30,19 @@ public class UserGameServiceImpl implements UserGameService {
                 .orElseThrow(() ->new ApiException("add game to user error"));
     }
 
+    @Override
+    public UserGameDTO saveResults(UserGameDTO userGameDTO) {
+        UserGame userGame = userGameRepository.findById(userGameDTO.getId()).get();
+        userGame.setActive(userGameDTO.isActive());
+        userGame.setMapId(userGameDTO.getMapId());
+        userGame.setPoints(userGameDTO.getPoints());
+        userGame.setUserId(userGameDTO.getUserId());
+        userGameRepository.save(userGame);
+        return userGameRepository
+                .findById(userGameDTO.getId())
+                .map(userGameMapper::toDTO)
+                .orElseThrow(() ->new ApiException("save result game to user error"));
+    }
 
     private UserGameDTO addUserGame(MyUser myUser, String mapId){
         UserGame userGame = UserGame.builder().userId(myUser.getId()).mapId(mapId).isActive(true).points(0L).build();

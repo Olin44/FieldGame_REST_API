@@ -1,10 +1,7 @@
 package pl.project.fieldgame.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.project.fieldgame.DTOs.UserGameDTO;
 import pl.project.fieldgame.services.UserGameService;
 
@@ -20,6 +17,10 @@ public class GameController {
         return userGameService.addNewUserGameToUser(userID, mapId);
     }
 
+    @PostMapping("saveResults")
+    private UserGameDTO saveResults(@RequestBody UserGameDTO userGameDTO){
+        return userGameService.saveResults(userGameDTO);
+    }
 
 
 }
