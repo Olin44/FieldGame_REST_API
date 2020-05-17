@@ -17,7 +17,6 @@ import java.util.List;
 public class UserController  {
 
     private final UserService userService;
-    private final UserGameService userGameService;
 
     @PostMapping("/registerUser")
     private MyUserDTO registerUser(@RequestBody MyUserDTO myUserDTO){
@@ -29,10 +28,6 @@ public class UserController  {
         return userService.login(loginUserDTO);
     }
 
-    @GetMapping("addNewUserGameToUser/{userId}/{mapId}")
-    private UserGameDTO addNewUserGameToUser(@PathVariable(name = "userId") String userID, @PathVariable(name = "mapId") String mapId){
-        return userGameService.addNewUserGameToUser(userID, mapId);
-    }
 
     @PostMapping("/logout")
     private LogoutUserDTO logout(@RequestBody LogoutUserDTO logoutUserDTO){

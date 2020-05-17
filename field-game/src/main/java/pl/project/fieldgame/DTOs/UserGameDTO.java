@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserGameDTO extends SimpleDTO {
+public class UserGameDTO extends SimpleDTOWithId {
    	    String mapId;
    	    String userId;
         Long points;

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MapDTO extends SimpleDTO{
+public class MapDTO extends SimpleDTOWithId{
     String name;
     List<ObjectOnMapDetailsDTO> objectOnMapDetails;
 }
