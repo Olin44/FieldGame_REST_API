@@ -3,7 +3,10 @@ package pl.project.fieldgame.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.project.fieldgame.DTOs.UserGameDTO;
+import pl.project.fieldgame.DTOs.UserStatsDTO;
 import pl.project.fieldgame.services.UserGameService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +23,11 @@ public class GameController {
     @PostMapping("saveResults")
     private UserGameDTO saveResults(@RequestBody UserGameDTO userGameDTO){
         return userGameService.saveResults(userGameDTO);
+    }
+
+    @GetMapping("getUserResult/{userId}")
+    private List<UserStatsDTO> getUserResult(@PathVariable(name = "userId") String userID){
+        return userGameService.getUserResult(userID);
     }
 
 
